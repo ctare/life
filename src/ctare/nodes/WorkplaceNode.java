@@ -1,5 +1,6 @@
 package ctare.nodes;
 
+import ctare.Main;
 import ctare.core.Graph;
 import ctare.core.Node;
 import ctare.nodes.unit.states.WorkplaceNodeStates;
@@ -39,8 +40,10 @@ public abstract class WorkplaceNode<E extends WorkplaceNode> extends Node {
     @Override // debug
     public void design(PApplet app) {
         super.design(app);
-        app.fill(255);
-        app.text(String.format("%d", this.member.size()), getPosition().x + getRadius(), getPosition().y + getRadius());
+        Main.instance().informationLayer.paint(main -> {
+            main.fill(255);
+            main.text(String.format("%d", this.member.size()), getPosition().x + getRadius(), getPosition().y + getRadius());
+        });
     }
 
     @Override

@@ -3,11 +3,11 @@ package ctare;
 import ctare.core.*;
 import ctare.mod.ModLoader;
 import ctare.mod.worksystem.StorageStates;
+import ctare.mod.worksystem.resource.FoodResourceNode;
+import ctare.mod.worksystem.resource.WoodResourceNode;
 import ctare.nodes.CentralNode;
 import ctare.nodes.VacantNode;
 import ctare.nodes.unit.UnitNode;
-import ctare.mod.worksystem.resource.FoodResourceNode;
-import ctare.mod.worksystem.resource.WoodResourceNode;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 public class Main extends PApplet {
-//    ArrayList<Node> nodes = new ArrayList<>();
-//    ArrayList<Edge> edges = new ArrayList<>();
     public Graph graph = new Graph();
     NodeSetter nodeSetter = new NodeSetter();
     final int MARGIN = 5;
@@ -30,6 +28,10 @@ public class Main extends PApplet {
     private ArrayList<UnitNode> addUnits = new ArrayList<>();
     private ArrayList<UnitNode> dropUnits = new ArrayList<>();
     public CentralNode root;
+    public final Layer baseLayer = new Layer();
+    public final Layer characterLayer = new Layer();
+    public final Layer informationLayer = new Layer();
+    private final ArrayList<Layer> layers = new ArrayList<>();
 
     private static Main main;
     public static Main instance() {
@@ -48,6 +50,10 @@ public class Main extends PApplet {
     @Override
     public void setup() {
         Main.main = this;
+
+        layers.add(baseLayer);
+        layers.add(characterLayer);
+        layers.add(informationLayer);
 
         textAlign(LEFT, TOP);
         textSize(15);
@@ -114,6 +120,7 @@ public class Main extends PApplet {
 
     @Override
     public void draw() {
+        layers.forEach(Layer::clear);
         background(51, 51, 51);
         fill(255);
         text(String.format("%.2f : %d", frameRate, units.size()), 0, 0);
@@ -162,6 +169,8 @@ public class Main extends PApplet {
         for (UnitNode unit : units) {
             unit.draw();
         }
+
+        layers.forEach(Layer::exec);
     }
 
     public boolean isHit(float x1, float y1, float r1, float x2, float y2, float r2) {

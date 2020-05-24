@@ -17,6 +17,7 @@ public class Node implements Drawable {
     private int amount;
     private Edge parent;
     private boolean active = false;
+    protected Layer layer = Main.instance().baseLayer;
 
     protected final int SIZE = 5;
     protected int getSize() {
@@ -54,12 +55,13 @@ public class Node implements Drawable {
 
     @Override
     public void draw() {
-        Main main = Main.instance();
         if (this.position != null) {
             if (this.active) {
-                main.noStroke();
-                main.fill(this.getColor().r, this.getColor().g, this.getColor().b);
-                this.design(main);
+                this.layer.paint((main) -> {
+                    main.noStroke();
+                    main.fill(this.getColor().r, this.getColor().g, this.getColor().b);
+                    this.design(main);
+                });
             }
         }
     }

@@ -1,5 +1,6 @@
 package ctare.nodes.unit;
 
+import ctare.Main;
 import ctare.core.Color;
 import ctare.core.Graph;
 import ctare.core.Node;
@@ -31,6 +32,7 @@ public class UnitNode extends Node {
 
     public UnitNode(WorkplaceNode place) {
         super(1);
+        this.layer = Main.instance().characterLayer;
         this.place = place;
         this.setPosition(place.getPosition().x, place.getPosition().y);
         this.readyFor(place, new Nothing());

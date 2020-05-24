@@ -9,7 +9,7 @@ import ctare.nodes.unit.UnitNode;
  * Created by ctare on 2020/05/20.
  */
 public class Nothing extends Purpose<WorkplaceNode> {
-    Nothing() {
+    public Nothing() {
         super(0);
     }
 

@@ -10,11 +10,12 @@ public class Edge implements Drawable {
 
     @Override
     public void draw() {
-        Main main = Main.instance();
         if (start != null && end != null) {
-            main.strokeWeight(3);
-            main.stroke(135);
-            main.line(start.getPosition().x, start.getPosition().y, end.getPosition().x, end.getPosition().y);
+            Main.instance().baseLayer.paint(main -> {
+                main.strokeWeight(3);
+                main.stroke(135);
+                main.line(start.getPosition().x, start.getPosition().y, end.getPosition().x, end.getPosition().y);
+            });
         }
     }
 
