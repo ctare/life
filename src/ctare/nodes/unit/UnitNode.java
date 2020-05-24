@@ -35,8 +35,17 @@ public class UnitNode extends Node {
         this.layer = Main.instance().characterLayer;
         this.place = place;
         this.setPosition(place.getPosition().x, place.getPosition().y);
-        this.readyFor(place, new Nothing());
         states = new UnitStates.Manager(this, this.getClass());
+    }
+
+    @Override
+    public void activate() {
+        super.activate();
+        this.firstAction();
+    }
+
+    protected void firstAction() {
+        this.readyFor(place, new Nothing());
     }
 
     @Override

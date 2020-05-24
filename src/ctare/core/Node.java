@@ -57,7 +57,7 @@ public class Node implements Drawable {
     public void draw() {
         if (this.position != null) {
             if (this.active) {
-                this.layer.paint((main) -> {
+                this.layer.paint(main -> {
                     main.noStroke();
                     main.fill(this.getColor().r, this.getColor().g, this.getColor().b);
                     this.design(main);
