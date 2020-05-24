@@ -49,6 +49,8 @@ public abstract class WorkplaceNode<E extends WorkplaceNode> extends Node {
     @Override
     public void draw() {
         super.draw();
-        this.states.update(this);
+        if (isActive()) {
+            this.states.update(this);
+        }
     }
 }

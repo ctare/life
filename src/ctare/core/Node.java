@@ -82,6 +82,14 @@ public class Node implements Drawable {
         this.active = true;
     }
 
+    public void deactivate() {
+        this.active = false;
+    }
+
+    public final boolean isActive() {
+        return this.active;
+    }
+
     public void register(UnitNode unit) {
         this.member.add(unit);
     }

@@ -69,8 +69,10 @@ public class UnitNode extends Node {
     @Override
     public void draw() {
         super.draw();
-        state.update();
-        states.update(this);
+        if (this.isActive()) {
+            state.update();
+            states.update(this);
+        }
     }
 
     private void addPlan(Node place) {
