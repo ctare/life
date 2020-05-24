@@ -103,6 +103,7 @@ public class Main extends PApplet {
 
     public void dropUnit(UnitNode unit) {
         dropUnits.add(unit);
+        unit.deactivate();
     }
 
     private void execAddUnit() {
