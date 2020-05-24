@@ -21,7 +21,7 @@ public class AgeStates extends UnitStates {
         this.age -= 1;
         if (this.age == 0) {
             Main.instance().dropUnit(holder);
-            Main.instance().addUnit(new Corpse(holder));
+            holder.place.states.get(CorpseMemberStates.class).register(new Corpse(holder));
         }
     }
 }

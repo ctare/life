@@ -108,7 +108,7 @@ public class Main extends PApplet {
     private void execAddUnit() {
         units.addAll(addUnits);
         addUnits.forEach(Node::activate);
-        addUnits = new ArrayList<>();
+        addUnits.clear();
     }
 
     private void execDropUnit() {
@@ -116,6 +116,7 @@ public class Main extends PApplet {
             units.remove(unit);
             unit.getBelong().member.remove(unit);
         });
+        dropUnits.clear();
     }
 
     @Override
