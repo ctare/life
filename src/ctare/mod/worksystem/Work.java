@@ -17,6 +17,10 @@ public class Work extends Purpose<WorkplaceNode> {
         this.add(unitNode -> Calc.bernoulli(0.01f));
     }};
 
+    public Work() {
+        super(3);
+    }
+
     @Override
     public State getState(UnitNode unit, WorkplaceNode where) {
         return new Working(unit, (ResourceNode)where);

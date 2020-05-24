@@ -13,6 +13,7 @@ public class Report extends Purpose<CentralNode> {
     public final Resource resource;
 
     public Report(Resource resource) {
+        super(10);
         this.resource = resource;
     }
 
