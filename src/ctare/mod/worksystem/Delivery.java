@@ -1,5 +1,7 @@
 package ctare.mod.worksystem;
 
+import ctare.mod.bagsystem.BagStates;
+import ctare.mod.worksystem.resource.Resource;
 import ctare.nodes.CentralNode;
 import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.purpose.Nothing;
@@ -17,7 +19,9 @@ public class Delivery extends State<CentralNode> {
 
     @Override
     public void update() {
-        this.where.states.get(StorageStates.class).storage.save(this.report.getResource());
+        Resource resource = this.report.getResource();
+        this.where.states.get(StorageStates.class).storage.save(resource);
+        this.unit.states.get(BagStates.class).remove(resource);
         State.Manager.call(Delivery.class, this);
         this.unit.forceReadyFor(where, new Nothing());
     }

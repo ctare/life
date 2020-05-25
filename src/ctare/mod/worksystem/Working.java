@@ -1,6 +1,8 @@
 package ctare.mod.worksystem;
 
 import ctare.Main;
+import ctare.mod.bagsystem.BagStates;
+import ctare.mod.worksystem.resource.Resource;
 import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.state.Free;
 import ctare.nodes.unit.state.State;
@@ -25,7 +27,11 @@ public class Working extends Free<ResourceNode> {
 
             State.Manager.call(Working.class, this);
         } else {
-            this.unit.forceReadyFor(Main.instance().root, new Report(this.where.gather(this.unit.states.get(ShippingStates.class).capacity.value)));
+            Resource resource = this.where.gather(this.unit.states.get(ShippingStates.class).capacity.value);
+            this.unit.states.get(BagStates.class).add(new BagStates.Item(resource)
+                    .setItemColor(this.where.getColor())
+                    .setRadius(this.unit.getRadius()));
+            this.unit.forceReadyFor(Main.instance().root, new Report(resource));
         }
     }
 }
