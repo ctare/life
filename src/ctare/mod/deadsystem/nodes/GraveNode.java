@@ -1,4 +1,4 @@
-package ctare.mod.deadsystem;
+package ctare.mod.deadsystem.nodes;
 
 import ctare.core.Color;
 import ctare.core.NodesManager;

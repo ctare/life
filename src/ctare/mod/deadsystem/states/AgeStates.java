@@ -1,7 +1,8 @@
-package ctare.mod.deadsystem;
+package ctare.mod.deadsystem.states;
 
-import ctare.Main;
+import ctare.mod.deadsystem.unit.Corpse;
 import ctare.nodes.unit.UnitNode;
+import ctare.nodes.unit.state.Moving;
 import ctare.nodes.unit.states.UnitStates;
 import ctare.utils.Calc;
 
@@ -11,17 +12,23 @@ import ctare.utils.Calc;
 public class AgeStates extends UnitStates {
     int age;
     public AgeStates(UnitNode unit) {
-        super(unit);
+        this(unit, 10000);
+    }
 
-        this.age = Calc.random.nextInt(200) + 400;
+    public AgeStates(UnitNode unit, int averageLife) {
+        super(unit);
+        this.age = Calc.random.nextInt(1000) + averageLife;
     }
 
     @Override
     public void update(UnitNode holder) {
-        this.age -= 1;
-        if (this.age == 0) {
-            Main.instance().dropUnit(holder);
-            holder.place.states.get(CorpseMemberStates.class).register(new Corpse(holder));
+        this.age = Math.max(0, this.age - 1);
+        if (this.age == 0 && !(holder.state instanceof Moving)) {
+            Corpse.kill(holder);
         }
+    }
+
+    public int getAge() {
+        return age;
     }
 }

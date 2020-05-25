@@ -1,6 +1,5 @@
-package ctare.mod.deadsystem;
+package ctare.mod.deadsystem.states;
 
-import ctare.Main;
 import ctare.nodes.unit.UnitNode;
 
 /**
@@ -13,9 +12,6 @@ public class CorpseStates extends AgeStates {
 
     @Override
     public void update(UnitNode holder) {
-        this.age -= 1;
-        if (this.age == 0) {
-            Main.instance().dropUnit(holder);
-        }
+        this.age = Math.max(0, this.age - 1);
     }
 }

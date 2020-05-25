@@ -3,7 +3,13 @@ package ctare.mod.deadsystem;
 import ctare.Main;
 import ctare.core.NodesManager;
 import ctare.mod.ModLoader;
+import ctare.mod.deadsystem.nodes.GraveNode;
+import ctare.mod.deadsystem.states.AgeStates;
+import ctare.mod.deadsystem.states.CorpseMemberStates;
+import ctare.mod.deadsystem.states.CorpseStates;
+import ctare.mod.deadsystem.unit.Corpse;
 import ctare.nodes.unit.states.UnitStates;
+import ctare.nodes.unit.states.WorkplaceNodeStates;
 
 /**
  * Created by ctare on 2020/05/23.
@@ -27,5 +33,6 @@ public final class ModMain extends ModLoader {
     public void statesRegister() {
         UnitStates.Manager.register(AgeStates.class);
         UnitStates.Manager.addHook.register(Corpse.class, CorpseStates::new, AgeStates.class);
+        WorkplaceNodeStates.Manager.register(CorpseMemberStates.class);
     }
 }

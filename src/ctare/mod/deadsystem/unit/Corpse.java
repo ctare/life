@@ -1,6 +1,10 @@
-package ctare.mod.deadsystem;
+package ctare.mod.deadsystem.unit;
 
+import ctare.Main;
 import ctare.core.Color;
+import ctare.mod.bagsystem.BagStates;
+import ctare.mod.deadsystem.state.DeadState;
+import ctare.mod.deadsystem.states.CorpseMemberStates;
 import ctare.nodes.unit.UnitNode;
 
 /**
@@ -11,7 +15,6 @@ public class Corpse extends UnitNode {
     public Corpse(UnitNode unit) {
         super(unit.place);
         super.setPosition(unit.getPosition().x, unit.getPosition().y);
-        this.activate();
     }
 
     @Override
@@ -22,5 +25,12 @@ public class Corpse extends UnitNode {
     @Override
     public Color getColor() {
         return Corpse.color;
+    }
+
+    public static void kill(UnitNode unit) {
+        Main.instance().dropUnit(unit);
+        Corpse corpse = new Corpse(unit);
+        unit.states.get(BagStates.class).transfer(corpse.states.get(BagStates.class));
+        unit.place.states.get(CorpseMemberStates.class).register(corpse);
     }
 }
