@@ -37,7 +37,7 @@ public final class ModMain extends ModLoader {
                     if (vacantNodes.size() == 0) {
                         vacantNodes = NodesManager.get(VacantNode.class);
                     }
-                    working.unit.readyFor(Calc.getNode(vacantNodes), new Nothing());
+                    working.unit.forceReadyFor(Calc.getNode(vacantNodes), new Nothing());
                 }
             }
         });

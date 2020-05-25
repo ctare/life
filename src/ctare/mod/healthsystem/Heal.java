@@ -28,7 +28,7 @@ public class Heal extends Free<RestNode> {
             if (nodes.size() == 0) {
                 nodes = NodesManager.get(VacantNode.class);
             }
-            this.unit.readyFor(Calc.getNode(nodes), new Nothing());
+            this.unit.forceReadyFor(Calc.getNode(nodes), new Nothing());
         }
 
         State.Manager.call(Heal.class, this);

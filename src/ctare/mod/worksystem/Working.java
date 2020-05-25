@@ -25,7 +25,7 @@ public class Working extends Free<ResourceNode> {
 
             State.Manager.call(Working.class, this);
         } else {
-            this.unit.readyFor(Main.instance().root, new Report(this.where.gather(this.unit.states.get(ShippingStates.class).capacity.value)));
+            this.unit.forceReadyFor(Main.instance().root, new Report(this.where.gather(this.unit.states.get(ShippingStates.class).capacity.value)));
         }
     }
 }

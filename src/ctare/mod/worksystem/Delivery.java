@@ -19,6 +19,6 @@ public class Delivery extends State<CentralNode> {
     public void update() {
         this.where.states.get(StorageStates.class).storage.save(this.report.getResource());
         State.Manager.call(Delivery.class, this);
-        this.unit.readyFor(where, new Nothing());
+        this.unit.forceReadyFor(where, new Nothing());
     }
 }
