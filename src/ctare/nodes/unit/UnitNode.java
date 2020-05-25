@@ -83,9 +83,18 @@ public class UnitNode extends Node {
         return speed;
     }
 
+    public void forceReadyFor(WorkplaceNode workplaceNode, Purpose purpose) {
+        this.purpose = null;
+        readyFor(workplaceNode, purpose);
+    }
+
     public void readyFor(WorkplaceNode workplace, Purpose purpose) {
         if (this.state instanceof Ready) {
             System.out.println("warning!!! readyFor");
+            return;
+        }
+
+        if (this.purpose != null && this.purpose.priority >= purpose.priority) {
             return;
         }
 
