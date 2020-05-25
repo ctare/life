@@ -86,7 +86,7 @@ public class Main extends PApplet {
         nodeSetter.setPosition(width / 2, height / 2);
         nodeSetter.register(graph);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             addUnit(root);
         }
 
@@ -125,7 +125,7 @@ public class Main extends PApplet {
         layers.forEach(Layer::clear);
         background(51, 51, 51);
         fill(255);
-        text(String.format("%.2f : %d", frameRate, units.size()), 0, 0);
+        text(String.format("%d : %.2f : %d", frameCount, frameRate, units.size()), 0, 0);
         scale(displayScale);
         translate(displayVec.x, displayVec.y);
         execAddUnit();
