@@ -25,6 +25,6 @@ public class ModMain extends ModLoader {
 
     @Override
     public void statesRegister() {
-        UnitStates.Manager.addHook.register(UnitNode.class, DragStates::new);
+        UnitStates.Manager.addHook.register(UnitNode.class, BagStates::new);
     }
 }

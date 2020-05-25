@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Created by ctare on 2020/05/25.
  */
-public class DragStates extends UnitStates {
+public class BagStates extends UnitStates {
     public static class Item {
         private Object key;
         private Color itemColor = new Color(255, 255, 255);
@@ -42,7 +42,7 @@ public class DragStates extends UnitStates {
     private HashMap<Object, Item> items = new HashMap<>();
     private UnitNode owner;
     private static final int CLOSENESS = 0;
-    public DragStates(UnitNode unit) {
+    public BagStates(UnitNode unit) {
         super(unit);
         owner = unit;
     }
