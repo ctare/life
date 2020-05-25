@@ -1,7 +1,6 @@
 package ctare.mod.bagsystem;
 
 import ctare.mod.ModLoader;
-import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.states.UnitStates;
 
 /**
@@ -25,6 +24,6 @@ public class ModMain extends ModLoader {
 
     @Override
     public void statesRegister() {
-        UnitStates.Manager.addHook.register(UnitNode.class, BagStates::new);
+        UnitStates.Manager.register(BagStates.class);
     }
 }

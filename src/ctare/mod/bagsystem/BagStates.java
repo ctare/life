@@ -88,4 +88,9 @@ public class BagStates extends UnitStates {
     public String toString() {
         return this.items().toString();
     }
+
+    public void transfer(BagStates to) {
+        to.items.putAll(this.items);
+        this.items.clear();
+    }
 }
