@@ -17,6 +17,7 @@ public abstract class ModLoader {
         mods.add(new ctare.mod.deadsystem.ModMain());
         mods.add(new ctare.mod.healthsystem.ModMain());
         mods.add(new ctare.mod.worksystem.ModMain());
+        mods.add(new ctare.mod.bagsystem.ModMain());
 
         mods.forEach(ModLoader::initialize);
         mods.forEach(ModLoader::stateRegister);
