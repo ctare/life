@@ -23,12 +23,7 @@ public class NodeSetter {
     }
 
     public void register(Graph graph, Edge edge) {
-        graph.nodes.add(this.node);
-        if (edge != null) {
-            this.node.setParent(edge);
-            graph.edges.add(edge);
-        }
-        this.node.activate();
+        graph.register(this.node, edge);
         this.node = null;
     }
 

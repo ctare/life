@@ -2,16 +2,19 @@ package ctare.core;
 
 import ctare.Main;
 import ctare.nodes.unit.UnitNode;
+import ctare.utils.MappedArray;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by ctare on 2020/05/17.
  */
 public class Node implements Drawable {
     public final ArrayList<UnitNode> member = new ArrayList<>();
+    public final MappedArray<Node, Integer> distances = new MappedArray<>(Comparator.comparingInt(MappedArray.KeyValue::getValue));
 
     private PVector position;
     private int amount;

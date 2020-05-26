@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 public class Main extends PApplet {
     public Graph graph = new Graph();
-    NodeSetter nodeSetter = new NodeSetter();
+    private NodeSetter nodeSetter = new NodeSetter();
     final int MARGIN = 5;
     private float displayScale = 1.0f;
     private PVector displayVec = new PVector(0, 0);
@@ -77,7 +77,14 @@ public class Main extends PApplet {
             nodeSetter.clear();
             targetEdge = null;
         });
-        keymap.register('z', main -> System.out.println(root.states.get(StorageStates.class).storage));
+        keymap.register('z', main -> {
+            System.out.println(root.states.get(StorageStates.class).storage);
+//            for (Node node : graph.nodes) {
+//                System.out.println("-----");
+//                System.out.println(node.getClass().getSimpleName());
+//                System.out.println(node.distances);
+//            }
+        });
 
         ModLoader.load();
 

@@ -9,6 +9,22 @@ public class Graph {
     public ArrayList<Node> nodes = new ArrayList<>();
     public ArrayList<Edge> edges = new ArrayList<>();
 
+    public void register(Node node, Edge edge) {
+        if (edge != null) {
+            node.setParent(edge);
+            edges.add(edge);
+
+            Node parent = edge.getStart();
+            for (Node n : nodes) {
+                node.distances.put(n, parent.distances.get(n) + 1);
+                n.distances.put(node, n.distances.get(parent) + 1);
+            }
+        }
+        nodes.add(node);
+        node.distances.put(node, 0);
+        node.activate();
+    }
+
     public static ArrayList<Node> getRoute(Node startNode) {
         Edge parent = startNode.getParent();
         ArrayList<Node> route = new ArrayList<>();

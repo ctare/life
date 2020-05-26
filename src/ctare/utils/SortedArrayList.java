@@ -9,7 +9,7 @@ import java.util.Comparator;
  * Created by ctare on 2020/05/21.
  */
 public class SortedArrayList<E> extends ArrayList<E> {
-    Comparator<E> comparator;
+    private Comparator<E> comparator;
 
     public SortedArrayList(Comparator<E> comparator) {
         this.comparator = comparator;
