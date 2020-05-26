@@ -42,7 +42,7 @@ public class PickUpState extends State<WorkplaceNode> {
             bag.add(item);
             target.states.get(BagStates.class).transfer(bag);
 
-            Node.execNodes(where, GraveNode.class, node -> {
+            where.execNodes(GraveNode.class, node -> {
                 unit.forceReadyFor(node, new Abandon());
                 return true;
             });

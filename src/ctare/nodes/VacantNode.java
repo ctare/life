@@ -1,6 +1,5 @@
 package ctare.nodes;
 
-import ctare.core.Node;
 import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.purpose.Nothing;
 
@@ -17,7 +16,7 @@ public abstract class VacantNode extends WorkplaceNode {
 
     public static void free(UnitNode unit) {
         Consumer<VacantNode> proc = node -> unit.forceReadyFor(node, new Nothing());
-        List<VacantNode> nodes = Node.execNodes(unit.place, VacantNode.class, node -> {
+        List<VacantNode> nodes = unit.place.execNodes(VacantNode.class, node -> {
             if (!node.member.isFull()) {
                 proc.accept(node);
                 return true;

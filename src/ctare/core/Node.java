@@ -95,9 +95,9 @@ public class Node implements Drawable {
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends Node> List<T> execNodes(Node now, Class<T> cls, Predicate<T> p) {
+    public <T extends Node> List<T> execNodes(Class<T> cls, Predicate<T> p) {
         List<T> visited = new ArrayList<>();
-        for (MappedArray.KeyValue<Node, Integer> v : FilterIterator.filter(now.distances, e -> cls.isAssignableFrom(e.getKey().getClass()))) {
+        for (MappedArray.KeyValue<Node, Integer> v : FilterIterator.filter(this.distances, e -> cls.isAssignableFrom(e.getKey().getClass()))) {
             T node = (T) v.getKey();
             if (p.test(node)) {
                 return null;

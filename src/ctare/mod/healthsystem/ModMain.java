@@ -1,7 +1,6 @@
 package ctare.mod.healthsystem;
 
 import ctare.Main;
-import ctare.core.Node;
 import ctare.mod.ModLoader;
 import ctare.mod.worksystem.Work;
 import ctare.mod.worksystem.Working;
@@ -28,7 +27,7 @@ public final class ModMain extends ModLoader {
 
             if (working.unit.states.get(HealthStates.class).power.value == 0 && !(working.unit.purpose instanceof Rest)) {
 
-                List<RestNode> nodes = Node.execNodes(working.unit.place, RestNode.class, node -> {
+                List<RestNode> nodes = working.where.execNodes(RestNode.class, node -> {
                     if (!node.member.isFull()) {
                         working.unit.readyFor(node, new Rest());
                         return true;
@@ -44,7 +43,7 @@ public final class ModMain extends ModLoader {
 
         State.Manager.register(Free.class, free -> {
             if (!free.unit.states.get(HealthStates.class).power.isFull()) {
-                Node.execNodes(free.where, RestNode.class, node -> {
+                free.where.execNodes(RestNode.class, node -> {
                     if (!node.member.isFull()) {
                         free.unit.readyFor(node, new Rest());
                         return true;

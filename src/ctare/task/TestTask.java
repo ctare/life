@@ -1,7 +1,6 @@
 package ctare.task;
 
 import ctare.Main;
-import ctare.core.Node;
 import ctare.mod.worksystem.ResourceNode;
 import ctare.nodes.WorkplaceNode;
 
@@ -17,7 +16,7 @@ public class TestTask extends Task {
 
     @Override
     public List<? extends WorkplaceNode> getWorkplace() {
-        List<ResourceNode> nodes = Node.execNodes(Main.instance().root, ResourceNode.class, node -> false);
+        List<ResourceNode> nodes = Main.instance().root.execNodes(ResourceNode.class, node -> false);
         if (nodes == null) {
             return new ArrayList<>();
         } else {
