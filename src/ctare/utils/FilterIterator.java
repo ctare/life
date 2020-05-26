@@ -19,7 +19,7 @@ public class FilterIterator<E> implements Iterator<E>, Iterable<E> {
 
     private E getNextValue() {
         while (this.itr.hasNext()) {
-            E value = this.next();
+            E value = this.itr.next();
             if (p.test(value)) {
                 return value;
             }

@@ -5,12 +5,10 @@ import ctare.core.Node;
 import ctare.nodes.unit.states.WorkplaceNodeStates;
 import processing.core.PApplet;
 
-import java.util.List;
-
 /**
  * Created by ctare on 2020/05/21.
  */
-public abstract class WorkplaceNode<E extends WorkplaceNode> extends Node {
+public abstract class WorkplaceNode extends Node {
     public WorkplaceNodeStates.Manager states;
 
     public WorkplaceNode(int amount) {
@@ -21,10 +19,7 @@ public abstract class WorkplaceNode<E extends WorkplaceNode> extends Node {
     public void activate() {
         super.activate();
         this.states = new WorkplaceNodeStates.Manager(this.getAmount(), this.getClass());
-        this.getNodes().add((E) this);
     }
-
-    public abstract List<E> getNodes();
 
     @Override // debug
     public void design(PApplet app) {

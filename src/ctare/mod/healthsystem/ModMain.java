@@ -1,16 +1,14 @@
 package ctare.mod.healthsystem;
 
 import ctare.Main;
-import ctare.core.NodesManager;
+import ctare.core.Node;
 import ctare.mod.ModLoader;
 import ctare.mod.worksystem.Work;
+import ctare.mod.worksystem.Working;
 import ctare.nodes.VacantNode;
-import ctare.nodes.unit.purpose.Nothing;
 import ctare.nodes.unit.state.Free;
 import ctare.nodes.unit.state.State;
-import ctare.mod.worksystem.Working;
 import ctare.nodes.unit.states.UnitStates;
-import ctare.utils.Calc;
 
 import java.util.List;
 
@@ -29,33 +27,36 @@ public final class ModMain extends ModLoader {
             HealthStates.damage(working.unit, 50);
 
             if (working.unit.states.get(HealthStates.class).power.value == 0 && !(working.unit.purpose instanceof Rest)) {
-                List<RestNode> nodes = NodesManager.getVacancy(RestNode.class);
-                if (nodes.size() > 0) {
-                    working.unit.readyFor(Calc.getNode(nodes), new Rest());
-                } else {
-                    List<VacantNode> vacantNodes = NodesManager.getVacancy(VacantNode.class);
-                    if (vacantNodes.size() == 0) {
-                        vacantNodes = NodesManager.get(VacantNode.class);
+
+                List<RestNode> nodes = Node.execNodes(working.unit.place, RestNode.class, node -> {
+                    if (!node.member.isFull()) {
+                        working.unit.readyFor(node, new Rest());
+                        return true;
                     }
-                    working.unit.forceReadyFor(Calc.getNode(vacantNodes), new Nothing());
+                    return false;
+                });
+
+                if (nodes != null) {
+                    VacantNode.free(working.unit);
                 }
             }
         });
 
         State.Manager.register(Free.class, free -> {
             if (!free.unit.states.get(HealthStates.class).power.isFull()) {
-                List<RestNode> nodes = NodesManager.getVacancy(RestNode.class);
-                if (nodes.size() > 0) {
-                    RestNode node = Calc.getNode(nodes);
-                    free.unit.readyFor(node, new Rest());
-                }
+                Node.execNodes(free.where, RestNode.class, node -> {
+                    if (!node.member.isFull()) {
+                        free.unit.readyFor(node, new Rest());
+                        return true;
+                    }
+                    return false;
+                });
             }
         });
     }
 
     @Override
     public void nodeRegister() {
-        NodesManager.register(RestNode.class);
         Main.instance().keymap.register('1', app -> app.nodeSupplier = () -> new FreeSpaceNode(5));
         Main.instance().keymap.register('4', app -> app.nodeSupplier = () -> new RestNode(5));
     }

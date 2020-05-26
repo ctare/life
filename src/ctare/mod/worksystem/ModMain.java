@@ -1,7 +1,6 @@
 package ctare.mod.worksystem;
 
 import ctare.Main;
-import ctare.core.NodesManager;
 import ctare.mod.ModLoader;
 import ctare.nodes.CentralNode;
 import ctare.nodes.WorkplaceNode;
@@ -39,7 +38,6 @@ public class ModMain extends ModLoader {
 
     @Override
     public void nodeRegister() {
-        NodesManager.register(ResourceNode.class);
     }
 
     @Override

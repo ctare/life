@@ -1,7 +1,6 @@
 package ctare.mod.deadsystem.states;
 
 import ctare.Main;
-import ctare.core.NodesManager;
 import ctare.mod.deadsystem.nodes.GraveNode;
 import ctare.mod.deadsystem.state.PickUpState;
 import ctare.mod.deadsystem.unit.Corpse;
@@ -32,7 +31,7 @@ public class CorpseMemberStates extends WorkplaceNodeStates {
 
         corpses.forEach(Corpse::draw);
 
-        if (NodesManager.get(GraveNode.class).size() > 0) {
+        if (GraveNode.getCnt() > 0) {
             int unitIndex = 0;
             for (Corpse corpse : corpses) {
                 while (unitIndex < holder.member.size()) {

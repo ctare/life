@@ -1,10 +1,13 @@
 package ctare.task;
 
-import ctare.core.NodesManager;
+import ctare.Main;
+import ctare.core.Node;
 import ctare.mod.worksystem.ResourceNode;
 import ctare.nodes.WorkplaceNode;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by ctare on 2020/05/19.
@@ -14,7 +17,14 @@ public class TestTask extends Task {
 
     @Override
     public List<? extends WorkplaceNode> getWorkplace() {
-        return NodesManager.getVacancy(ResourceNode.class);
+        List<ResourceNode> nodes = Node.execNodes(Main.instance().root, ResourceNode.class, node -> false);
+        if (nodes == null) {
+            return new ArrayList<>();
+        } else {
+            return nodes.stream()
+                    .filter(node -> !node.member.isFull())
+                    .collect(Collectors.toList());
+        }
     }
 
     @Override

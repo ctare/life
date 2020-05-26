@@ -2,18 +2,27 @@ package ctare.core;
 
 import ctare.Main;
 import ctare.nodes.unit.UnitNode;
+import ctare.utils.FilterIterator;
 import ctare.utils.MappedArray;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Created by ctare on 2020/05/17.
  */
 public class Node implements Drawable {
-    public final ArrayList<UnitNode> member = new ArrayList<>();
+    public class Member extends ArrayList<UnitNode> {
+        public boolean isFull() {
+            return this.size() >= Node.this.getAmount();
+        }
+    }
+
+    public final Member member = new Member();
     public final MappedArray<Node, Integer> distances = new MappedArray<>(Comparator.comparingInt(MappedArray.KeyValue::getValue));
 
     private PVector position;
@@ -99,5 +108,19 @@ public class Node implements Drawable {
 
     public void unregister(UnitNode unit) {
         this.member.remove(unit);
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T extends Node> List<T> execNodes(Node now, Class<T> cls, Predicate<T> p) {
+        List<T> visited = new ArrayList<>();
+        for (MappedArray.KeyValue<Node, Integer> v : FilterIterator.filter(now.distances, e -> cls.isAssignableFrom(e.getKey().getClass()))) {
+            T node = (T) v.getKey();
+            if (p.test(node)) {
+                return null;
+            } else {
+                visited.add(node);
+            }
+        }
+        return visited.size() == 0 ? null : visited;
     }
 }

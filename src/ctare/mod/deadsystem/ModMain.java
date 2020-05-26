@@ -1,7 +1,6 @@
 package ctare.mod.deadsystem;
 
 import ctare.Main;
-import ctare.core.NodesManager;
 import ctare.mod.ModLoader;
 import ctare.mod.deadsystem.nodes.GraveNode;
 import ctare.mod.deadsystem.states.AgeStates;
@@ -25,7 +24,6 @@ public final class ModMain extends ModLoader {
 
     @Override
     public void nodeRegister() {
-        NodesManager.register(GraveNode.class);
         Main.instance().keymap.register('g', app -> app.nodeSupplier = () -> new GraveNode(5));
     }
 

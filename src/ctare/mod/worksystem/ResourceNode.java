@@ -1,22 +1,17 @@
 package ctare.mod.worksystem;
 
 import ctare.core.Color;
-import ctare.core.NodesManager;
-import ctare.nodes.WorkplaceNode;
 import ctare.mod.worksystem.resource.Resource;
+import ctare.nodes.WorkplaceNode;
 import processing.core.PApplet;
-
-import java.util.*;
 
 /**
  * Created by ctare on 2020/05/18.
  */
-public abstract class ResourceNode extends WorkplaceNode<ResourceNode> {
+public abstract class ResourceNode extends WorkplaceNode {
     public Color resourceColor;
     protected int score = 0;
     private boolean growthPhase = true;
-
-//    public static final SortedArrayList<ResourceNode> resources = new SortedArrayList<>();
 
     private static final int VOLUME = 10;
 
@@ -67,10 +62,5 @@ public abstract class ResourceNode extends WorkplaceNode<ResourceNode> {
 
     private int gain() {
         return this.getAmount() * VOLUME;
-    }
-
-    @Override
-    public List<ResourceNode> getNodes() {
-        return NodesManager.get(ResourceNode.class);
     }
 }
