@@ -23,7 +23,7 @@ public class UnitNode extends Node {
     // private static final Color COLOR = new Color(155, 60, 60);
     private static final Color COLOR = new Color(227, 207, 105);
     private static final float speed = 3f;
-    private Node belong;
+    private WorkplaceNode belong;
     public WorkplaceNode place;
     public final UnitStates.Manager states;
     public Purpose purpose;
@@ -108,7 +108,7 @@ public class UnitNode extends Node {
         this.purpose = purpose;
     }
 
-    public Node getBelong() {
+    public WorkplaceNode getBelong() {
         return belong;
     }
 }

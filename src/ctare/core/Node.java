@@ -1,7 +1,6 @@
 package ctare.core;
 
 import ctare.Main;
-import ctare.nodes.unit.UnitNode;
 import ctare.utils.FilterIterator;
 import ctare.utils.MappedArray;
 import processing.core.PApplet;
@@ -16,13 +15,6 @@ import java.util.function.Predicate;
  * Created by ctare on 2020/05/17.
  */
 public class Node implements Drawable {
-    public class Member extends ArrayList<UnitNode> {
-        public boolean isFull() {
-            return this.size() >= Node.this.getAmount();
-        }
-    }
-
-    public final Member member = new Member();
     public final MappedArray<Node, Integer> distances = new MappedArray<>(Comparator.comparingInt(MappedArray.KeyValue::getValue));
 
     private PVector position;
@@ -100,14 +92,6 @@ public class Node implements Drawable {
 
     public final boolean isActive() {
         return this.active;
-    }
-
-    public void register(UnitNode unit) {
-        this.member.add(unit);
-    }
-
-    public void unregister(UnitNode unit) {
-        this.member.remove(unit);
     }
 
     @SuppressWarnings("unchecked")

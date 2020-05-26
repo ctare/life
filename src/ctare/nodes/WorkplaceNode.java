@@ -2,13 +2,33 @@ package ctare.nodes;
 
 import ctare.Main;
 import ctare.core.Node;
+import ctare.nodes.unit.UnitNode;
+import ctare.nodes.unit.states.NodeInfoStates;
 import ctare.nodes.unit.states.WorkplaceNodeStates;
 import processing.core.PApplet;
+
+import java.util.ArrayList;
 
 /**
  * Created by ctare on 2020/05/21.
  */
 public abstract class WorkplaceNode extends Node {
+    public class Member extends ArrayList<UnitNode> {
+        public boolean isFull() {
+            return this.size() >= states.get(NodeInfoStates.class).capacity.value;
+        }
+    }
+
+    public final Member member = new Member();
+
+    public void register(UnitNode unit) {
+        this.member.add(unit);
+    }
+
+    public void unregister(UnitNode unit) {
+        this.member.remove(unit);
+    }
+
     public WorkplaceNodeStates.Manager states;
 
     public WorkplaceNode(int amount) {
