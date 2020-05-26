@@ -3,9 +3,8 @@ package ctare.core;
 import ctare.nodes.VacantNode;
 import ctare.nodes.WorkplaceNode;
 import ctare.nodes.unit.states.NodeInfoStates;
-import ctare.utils.SortedArrayList;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,13 +22,15 @@ public final class NodesManager {
     }
 
     public static void register(Class<? extends WorkplaceNode> cls) {
-        workplaces.put(cls, new SortedArrayList<>(Comparator.comparingInt(WorkplaceNode::getDistance)));
+        workplaces.put(cls, new ArrayList<>());
     }
 
+    @SuppressWarnings("unchecked")
     public static <E> List<E> get(Class<E> cls) {
         return (List<E>)workplaces.get(cls);
     }
 
+    @SuppressWarnings("unchecked")
     public static <E> List<E> getVacancy(Class<E> cls) {
         return (List<E>)workplaces.get(cls).stream()
                 .filter(node -> node.member.size() < node.states.get(NodeInfoStates.class).capacity.value)

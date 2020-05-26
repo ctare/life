@@ -1,7 +1,6 @@
 package ctare.nodes;
 
 import ctare.Main;
-import ctare.core.Graph;
 import ctare.core.Node;
 import ctare.nodes.unit.states.WorkplaceNodeStates;
 import processing.core.PApplet;
@@ -13,29 +12,19 @@ import java.util.List;
  */
 public abstract class WorkplaceNode<E extends WorkplaceNode> extends Node {
     public WorkplaceNodeStates.Manager states;
-    protected int distance = 0;
 
     public WorkplaceNode(int amount) {
         super(amount);
-    }
-
-    public void calcDistance() {
-        this.distance = Graph.getRoute(this).size();
     }
 
     @Override
     public void activate() {
         super.activate();
         this.states = new WorkplaceNodeStates.Manager(this.getAmount(), this.getClass());
-        calcDistance();
         this.getNodes().add((E) this);
     }
 
     public abstract List<E> getNodes();
-
-    public int getDistance() {
-        return distance;
-    }
 
     @Override // debug
     public void design(PApplet app) {
