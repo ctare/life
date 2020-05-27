@@ -24,8 +24,11 @@
 # code TODO
 * ノードの距離考慮選択
     + Calc.getNode
-* workplace: unregisterをどうにかする
-* rest taskを個別に導入を書かない
+~~* workplace: unregisterをどうにかする~~
+~~* rest taskを個別に導入を書かない~~
+
+# issue
+~~* GraveNodeのcnt場所がおかしい~~
 
 # 目標
 * 自己拡大
