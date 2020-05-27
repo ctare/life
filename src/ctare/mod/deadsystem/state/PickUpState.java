@@ -3,6 +3,7 @@ package ctare.mod.deadsystem.state;
 import ctare.Main;
 import ctare.core.Node;
 import ctare.mod.bagsystem.BagStates;
+import ctare.mod.bagsystem.Item;
 import ctare.mod.deadsystem.nodes.GraveNode;
 import ctare.mod.deadsystem.purpose.Abandon;
 import ctare.mod.deadsystem.states.CorpseMemberStates;
@@ -36,7 +37,7 @@ public class PickUpState extends State<WorkplaceNode> {
 
             BagStates bag = unit.states.get(BagStates.class);
 
-            BagStates.Item item = new BagStates.Item(target)
+            Item item = new Item(target)
                     .setItemColor(target.getColor())
                     .setRadius(target.getRadius());
             bag.add(item);

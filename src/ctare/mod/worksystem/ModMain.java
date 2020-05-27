@@ -4,10 +4,9 @@ import ctare.Main;
 import ctare.mod.ModLoader;
 import ctare.nodes.CentralNode;
 import ctare.nodes.WorkplaceNode;
+import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.state.Free;
 import ctare.nodes.unit.state.State;
-import ctare.nodes.unit.states.UnitStates;
-import ctare.nodes.unit.states.WorkplaceNodeStates;
 import ctare.task.Task;
 import ctare.utils.Calc;
 
@@ -42,8 +41,8 @@ public class ModMain extends ModLoader {
 
     @Override
     public void statesRegister() {
-        UnitStates.Manager.register(ShippingStates.class);
+        UnitNode.statesManager.register(ShippingStates.class);
 //        WorkplaceNodeStates.Manager.register(StorageStates.class);
-        WorkplaceNodeStates.Manager.addHook.register(CentralNode.class, StorageStates::new);
+        WorkplaceNode.statesManager.addHook.register(CentralNode.class, StorageStates::new);
     }
 }

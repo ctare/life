@@ -5,9 +5,9 @@ import ctare.mod.ModLoader;
 import ctare.mod.worksystem.Work;
 import ctare.mod.worksystem.Working;
 import ctare.nodes.VacantNode;
+import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.state.Free;
 import ctare.nodes.unit.state.State;
-import ctare.nodes.unit.states.UnitStates;
 
 import java.util.List;
 
@@ -62,6 +62,6 @@ public final class ModMain extends ModLoader {
 
     @Override
     public void statesRegister() {
-        UnitStates.Manager.register(HealthStates.class);
+        UnitNode.statesManager.register(HealthStates.class);
     }
 }

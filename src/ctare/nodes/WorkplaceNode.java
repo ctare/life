@@ -4,6 +4,7 @@ import ctare.Main;
 import ctare.core.Node;
 import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.states.NodeInfoStates;
+import ctare.nodes.unit.states.States;
 import ctare.nodes.unit.states.WorkplaceNodeStates;
 import processing.core.PApplet;
 
@@ -29,7 +30,8 @@ public abstract class WorkplaceNode extends Node {
         this.member.remove(unit);
     }
 
-    public WorkplaceNodeStates.Manager states;
+    public static States.Manager<WorkplaceNodeStates, WorkplaceNode, Integer> statesManager = new States.Manager<>(int.class);
+    public States.Value<WorkplaceNodeStates, WorkplaceNode, Integer> states;
 
     public WorkplaceNode(int amount) {
         super(amount);
@@ -38,7 +40,7 @@ public abstract class WorkplaceNode extends Node {
     @Override
     public void activate() {
         super.activate();
-        this.states = new WorkplaceNodeStates.Manager(this.getAmount(), this.getClass());
+        this.states = statesManager.getValue(this.getAmount(), this.getClass());
     }
 
     @Override // debug

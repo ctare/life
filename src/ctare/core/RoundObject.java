@@ -28,6 +28,10 @@ public abstract class RoundObject implements Drawable {
         this.position = new PVector(x, y);
     }
 
+    public final void setPosition(PVector vector) {
+        this.setPosition(vector.x, vector.y);
+    }
+
     public PVector getPosition() {
         return position;
     }

@@ -1,11 +1,10 @@
 package ctare.nodes;
 
-import ctare.core.Color;
 import ctare.Main;
+import ctare.core.Color;
 import ctare.mod.worksystem.StorageStates;
 import ctare.mod.worksystem.resource.FoodResourceNode;
 import ctare.nodes.unit.states.NodeInfoStates;
-import ctare.nodes.unit.states.WorkplaceNodeStates;
 import ctare.task.TaskManager;
 
 /**
@@ -20,7 +19,7 @@ public class CentralNode extends VacantNode {
     }
 
     static {
-        WorkplaceNodeStates.Manager.addHook.register(CentralNode.class, amount -> new NodeInfoStates(amount * 5), NodeInfoStates.class);
+        WorkplaceNode.statesManager.addHook.register(CentralNode.class, amount -> new NodeInfoStates(amount * 5), NodeInfoStates.class);
     }
 
     @Override

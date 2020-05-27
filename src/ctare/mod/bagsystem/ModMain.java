@@ -1,7 +1,7 @@
 package ctare.mod.bagsystem;
 
 import ctare.mod.ModLoader;
-import ctare.nodes.unit.states.UnitStates;
+import ctare.nodes.unit.UnitNode;
 
 /**
  * Created by ctare on 2020/05/25.
@@ -24,6 +24,6 @@ public class ModMain extends ModLoader {
 
     @Override
     public void statesRegister() {
-        UnitStates.Manager.register(BagStates.class);
+        UnitNode.statesManager.register(BagStates.class);
     }
 }

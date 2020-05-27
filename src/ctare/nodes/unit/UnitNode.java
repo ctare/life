@@ -10,6 +10,7 @@ import ctare.nodes.unit.purpose.Nothing;
 import ctare.nodes.unit.purpose.Purpose;
 import ctare.nodes.unit.state.Ready;
 import ctare.nodes.unit.state.State;
+import ctare.nodes.unit.states.States;
 import ctare.nodes.unit.states.UnitStates;
 import ctare.utils.Calc;
 import processing.core.PApplet;
@@ -22,11 +23,13 @@ import java.util.ArrayList;
  */
 public class UnitNode extends RoundObject {
     // private static final Color COLOR = new Color(155, 60, 60);
+    public static final States.Manager<UnitStates, UnitNode, UnitNode> statesManager = new States.Manager<>(UnitNode.class);
+
     private static final Color COLOR = new Color(227, 207, 105);
     private static final float speed = 3f;
     private WorkplaceNode belong;
     public WorkplaceNode place;
-    public final UnitStates.Manager states;
+    public final UnitStates.Value<UnitStates, UnitNode, UnitNode> states;
     public Purpose purpose;
     public State state;
     public ArrayList<Node> plan = new ArrayList<>();
@@ -35,7 +38,8 @@ public class UnitNode extends RoundObject {
         super(Main.instance().characterLayer);
         this.place = place;
         this.setPosition(place.getPosition().x, place.getPosition().y);
-        states = new UnitStates.Manager(this, this.getClass());
+
+        states = statesManager.getValue(this, this.getClass());
     }
 
     @Override
