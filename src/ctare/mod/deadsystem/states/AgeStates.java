@@ -12,7 +12,7 @@ import ctare.utils.Calc;
 public class AgeStates extends UnitStates {
     int age;
     public AgeStates(UnitNode unit) {
-        this(unit, 100);
+        this(unit, 10000);
     }
 
     public AgeStates(UnitNode unit, int averageLife) {
