@@ -17,7 +17,18 @@ public class GraveNode extends WorkplaceNode {
 
     public GraveNode(int amount) {
         super(amount);
+    }
+
+    @Override
+    public void activate() {
+        super.activate();
         cnt++;
+    }
+
+    @Override
+    public void deactivate() {
+        super.deactivate();
+        cnt--;
     }
 
     public static int getCnt() {
