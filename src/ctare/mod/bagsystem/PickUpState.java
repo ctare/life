@@ -30,7 +30,7 @@ public class PickUpState<T extends Item> extends State<WorkplaceNode> {
 
         } else {
             unit.move(target.getPosition(), unit.getSpeed());
-
+            target.marking(5);
             State.Manager.call(PickUpState.class, this);
         }
     }

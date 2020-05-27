@@ -53,10 +53,13 @@ public abstract class RoundObject implements Drawable {
         app.ellipse(this.position.x, this.position.y, this.getRadius() * 2, this.getRadius() * 2);
     }
 
+    protected abstract void update();
+
     @Override
-    public void draw() {
+    public final void draw() {
         if (this.getPosition() != null) {
             if (this.isActive()) {
+                this.update();
                 this.layer.paint(main -> {
                     main.noStroke();
                     main.fill(this.getColor().r, this.getColor().g, this.getColor().b);

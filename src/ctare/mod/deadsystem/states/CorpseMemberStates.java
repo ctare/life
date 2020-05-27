@@ -2,12 +2,15 @@ package ctare.mod.deadsystem.states;
 
 import ctare.Main;
 import ctare.mod.bagsystem.BagStates;
+import ctare.mod.bagsystem.Item;
 import ctare.mod.bagsystem.ItemMemberStates;
 import ctare.mod.deadsystem.nodes.GraveNode;
 import ctare.mod.deadsystem.purpose.Abandon;
 import ctare.mod.deadsystem.unit.Corpse;
 import ctare.nodes.WorkplaceNode;
 import ctare.nodes.unit.UnitNode;
+
+import java.util.stream.Collectors;
 
 /**
  * Created by ctare on 2020/05/24.
@@ -30,18 +33,25 @@ public class CorpseMemberStates extends ItemMemberStates<Corpse> {
                 while (unitIndex < holder.member.size()) {
                     UnitNode unit = holder.member.get(unitIndex++);
                     if (Main.instance().isHit(unit, holder)) {
-                        pickUp(unit, corpse, () -> {
-                            corpse.getOrigin().states.get(BagStates.class).transfer(unit.states.get(BagStates.class));
+                        if (unit.purpose.priority < Abandon.PRIORITY) {
+                            pickUp(unit, corpse, () -> {
+                                corpse.getOrigin().states.get(BagStates.class).transfer(unit.states.get(BagStates.class));
 
-                            holder.execNodes(GraveNode.class, node -> {
-                                unit.forceReadyFor(node, new Abandon());
-                                return true;
+                                holder.execNodes(GraveNode.class, node -> {
+                                    unit.forceReadyFor(node, new Abandon());
+                                    return true;
+                                });
                             });
-                        });
+                        }
                         break;
                     }
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.items.stream().map(Item::hasOwner).map(Object::toString).collect(Collectors.joining(", "));
     }
 }

@@ -36,7 +36,6 @@ public class BagStates extends UnitStates {
         RoundObject driver = holder;
         for (Item item : items) {
             calcItemPosition(driver, item);
-            item.update();
             item.draw();
             driver = item;
         }

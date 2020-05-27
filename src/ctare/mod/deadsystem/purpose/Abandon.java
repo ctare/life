@@ -10,8 +10,9 @@ import ctare.nodes.unit.state.State;
  * Created by ctare on 2020/05/25.
  */
 public class Abandon extends Purpose<GraveNode> {
+    public static final int PRIORITY = 30;
     public Abandon() {
-        super(30);
+        super(PRIORITY);
     }
 
     @Override

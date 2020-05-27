@@ -5,6 +5,7 @@ import ctare.mod.bagsystem.Item;
 import ctare.mod.deadsystem.nodes.GraveNode;
 import ctare.mod.deadsystem.unit.Corpse;
 import ctare.nodes.unit.UnitNode;
+import ctare.nodes.unit.purpose.Nothing;
 import ctare.nodes.unit.state.Free;
 import ctare.nodes.unit.state.State;
 import ctare.nodes.unit.states.StatesValue;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * Created by ctare on 2020/05/25.
  */
 public class AbandonState extends Free<GraveNode> {
-    private StatesValue processingTime = new StatesValue(0, 200);
+    private StatesValue processingTime = new StatesValue(0, 10);
     private ArrayList<Corpse> corpses = new ArrayList<>();
     private BagStates bag;
     public AbandonState(UnitNode unit, GraveNode where) {
@@ -40,6 +41,7 @@ public class AbandonState extends Free<GraveNode> {
             }
             State.Manager.call(AbandonState.class, this);
         } else {
+            unit.purpose = new Nothing();
             unit.state = new MourningState(unit, where);
         }
     }

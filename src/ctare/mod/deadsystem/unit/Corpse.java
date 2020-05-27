@@ -26,7 +26,7 @@ public class Corpse extends Item {
     }
 
     @Override
-    public void update() {
+    protected void update() {
         super.update();
         origin.states.get(BagStates.class).update(origin);
     }

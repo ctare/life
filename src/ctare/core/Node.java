@@ -31,6 +31,10 @@ public class Node extends RoundObject {
         return Node.COLOR;
     }
 
+    @Override
+    protected void update() {
+    }
+
     public Node(int amount) {
         super();
         this.amount = amount;

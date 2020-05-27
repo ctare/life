@@ -1,10 +1,7 @@
 package ctare.nodes.unit;
 
 import ctare.Main;
-import ctare.core.Color;
-import ctare.core.Graph;
-import ctare.core.Node;
-import ctare.core.RoundObject;
+import ctare.core.*;
 import ctare.nodes.WorkplaceNode;
 import ctare.nodes.unit.purpose.Nothing;
 import ctare.nodes.unit.purpose.Purpose;
@@ -71,12 +68,9 @@ public class UnitNode extends RoundObject {
     }
 
     @Override
-    public void draw() {
-        super.draw();
-        if (this.isActive()) {
-            state.update();
-            states.update(this);
-        }
+    protected void update() {
+        state.update();
+        states.update(this);
     }
 
     private void addPlan(Node place) {

@@ -2,11 +2,13 @@ package ctare;
 
 import ctare.core.*;
 import ctare.mod.ModLoader;
+import ctare.mod.deadsystem.states.CorpseMemberStates;
 import ctare.mod.worksystem.StorageStates;
 import ctare.mod.worksystem.resource.FoodResourceNode;
 import ctare.mod.worksystem.resource.WoodResourceNode;
 import ctare.nodes.CentralNode;
 import ctare.nodes.VacantNode;
+import ctare.nodes.WorkplaceNode;
 import ctare.nodes.unit.UnitNode;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -84,6 +86,18 @@ public class Main extends PApplet {
 //                System.out.println(node.getClass().getSimpleName());
 //                System.out.println(node.distances);
 //            }
+        });
+        keymap.register('w', main -> {
+            addUnit(root);
+        });
+        keymap.register('e', main -> {
+            this.graph.nodes.forEach(node -> {
+                if (node instanceof WorkplaceNode) {
+                    WorkplaceNode workplaceNode = ((WorkplaceNode) node);
+                    System.out.println(workplaceNode.states.get(CorpseMemberStates.class));
+
+                }
+            });
         });
 
         ModLoader.load();

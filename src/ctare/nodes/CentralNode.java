@@ -33,9 +33,8 @@ public class CentralNode extends VacantNode {
     }
 
     @Override
-    public void draw() {
-        super.draw();
-
+    protected void update() {
+        super.update();
         if (this.states.get(StorageStates.class).storage.use(new FoodResourceNode.Food(300))) { // TODO: ResourceNodeをどこかへやる
             Main.instance().addUnit(this);
         }

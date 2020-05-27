@@ -3,7 +3,6 @@ package ctare.mod.bagsystem;
 import ctare.Main;
 import ctare.core.Color;
 import ctare.core.RoundObject;
-import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.states.States;
 
 /**
@@ -14,7 +13,7 @@ public class Item extends RoundObject {
     protected Color itemColor = new Color(255, 255, 255);
     private int radius = 5;
     public States.Value<ItemStates, Item, Item> states;
-    public UnitNode owner = null;
+    public Marking marking = new Marking(0);
 
     public Item() {
         super(Main.instance().characterLayer);
@@ -41,11 +40,30 @@ public class Item extends RoundObject {
         return this.itemColor;
     }
 
-    public void update() {
+    @Override
+    protected void update() {
         states.update(this);
+        this.marking.update();
     }
 
     public final boolean hasOwner() {
-        return this.owner != null && this.owner.isActive();
+//        return this.owner != null && this.owner.isActive();
+        return this.marking.time > 0;
+    }
+
+    public final void marking(int time) {
+        this.marking.time = time;
+    }
+
+    private static class Marking {
+        private int time;
+
+        public Marking(int time) {
+            this.time = time;
+        }
+
+        public void update() {
+            this.time = Math.max(0, this.time - 1);
+        }
     }
 }
