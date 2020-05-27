@@ -9,6 +9,7 @@ import ctare.mod.deadsystem.purpose.Abandon;
 import ctare.mod.deadsystem.unit.Corpse;
 import ctare.nodes.WorkplaceNode;
 import ctare.nodes.unit.UnitNode;
+import ctare.nodes.unit.state.Ready;
 
 import java.util.stream.Collectors;
 
@@ -33,7 +34,7 @@ public class CorpseMemberStates extends ItemMemberStates<Corpse> {
                 while (unitIndex < holder.member.size()) {
                     UnitNode unit = holder.member.get(unitIndex++);
                     if (Main.instance().isHit(unit, holder)) {
-                        if (unit.purpose.priority < Abandon.PRIORITY) {
+                        if (unit.purpose.priority < Abandon.PRIORITY && !(unit.state instanceof Ready)) {
                             unit.purpose = new Abandon();
                             pickUp(unit, corpse, () -> {
                                 corpse.getOrigin().states.get(BagStates.class).transfer(unit.states.get(BagStates.class));
