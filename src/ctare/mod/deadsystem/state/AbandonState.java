@@ -1,7 +1,8 @@
 package ctare.mod.deadsystem.state;
 
-import ctare.mod.deadsystem.nodes.GraveNode;
 import ctare.mod.bagsystem.BagStates;
+import ctare.mod.bagsystem.Item;
+import ctare.mod.deadsystem.nodes.GraveNode;
 import ctare.mod.deadsystem.unit.Corpse;
 import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.state.Free;
@@ -20,7 +21,7 @@ public class AbandonState extends Free<GraveNode> {
     public AbandonState(UnitNode unit, GraveNode where) {
         super(unit, where);
         bag = unit.states.get(BagStates.class);
-        for (Object o : bag.items()) {
+        for (Item o : bag.items()) {
             if (o instanceof Corpse) {
                 corpses.add((Corpse) o);
             }

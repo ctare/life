@@ -1,6 +1,7 @@
 package ctare.mod.bagsystem;
 
 import ctare.nodes.WorkplaceNode;
+import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.states.WorkplaceNodeStates;
 
 import java.util.ArrayList;
@@ -9,10 +10,10 @@ import java.util.List;
 /**
  * Created by ctare on 2020/05/27.
  */
-public abstract class ItemMemberStates extends WorkplaceNodeStates {
-    private List<Item> items = new ArrayList<>();
-    private List<Item> dropItems = new ArrayList<>();
-    private List<Item> addItems = new ArrayList<>();
+public abstract class ItemMemberStates<T extends Item> extends WorkplaceNodeStates {
+    protected List<T> items = new ArrayList<>();
+    private List<T> dropItems = new ArrayList<>();
+    private List<T> addItems = new ArrayList<>();
     public ItemMemberStates(int amount) {
         super(amount);
     }
@@ -26,5 +27,18 @@ public abstract class ItemMemberStates extends WorkplaceNodeStates {
         dropItems.clear();
 
         items.forEach(Item::draw);
+    }
+
+    public void register(T item) {
+        this.addItems.add(item);
+    }
+
+    public void unregister(T item) {
+        this.dropItems.add(item);
+    }
+
+    public final void pickUp(UnitNode unit, T item, Runnable then) {
+        unit.state = new PickUpState<>(unit, item, then, this);
+        item.owner = unit;
     }
 }

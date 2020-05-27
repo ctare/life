@@ -6,40 +6,15 @@ import ctare.nodes.unit.UnitNode;
 import ctare.nodes.unit.states.UnitStates;
 import processing.core.PVector;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ctare on 2020/05/25.
  */
 public class BagStates extends UnitStates {
-//    public static class Item {
-//        private Object key;
-//        private Color itemColor = new Color(255, 255, 255);
-//        private int radius = 5;
-//        private PVector position;
-//
-//        public Item(Object key) {
-//            this.key = key;
-//        }
-//
-//        public Item setItemColor(Color itemColor) {
-//            this.itemColor = itemColor;
-//            return this;
-//        }
-//
-//        public Item setRadius(int radius) {
-//            this.radius = radius;
-//            return this;
-//        }
-//
-//        private void setPosition(PVector p) {
-//            this.position = p;
-//        }
-//    }
-
-    private HashMap<Object, Item> items = new HashMap<>();
+    // private HashMap<Object, Item> items = new HashMap<>();
+    private List<Item> items = new ArrayList<>();
     private UnitNode owner;
     private static final int CLOSENESS = 0;
     public BagStates(UnitNode unit) {
@@ -60,7 +35,7 @@ public class BagStates extends UnitStates {
     @Override
     public void update(UnitNode holder) {
         RoundObject driver = holder;
-        for (Item item : items.values()) {
+        for (Item item : items) {
             calcItemPosition(driver, item);
             item.update();
             item.draw();
@@ -69,16 +44,17 @@ public class BagStates extends UnitStates {
     }
 
     public void add(Item item) {
-        items.put(item.key, item);
+//        items.put(item.key, item);
+        items.add(item);
         item.setPosition(owner.getPosition());
     }
 
-    public void remove(Object key) {
-        items.remove(key);
+    public void remove(Item item) {
+        items.remove(item);
     }
 
-    public Collection<Object> items() {
-        return this.items.values().stream().map(v -> v.key).collect(Collectors.toList());
+    public List<Item> items() {
+        return items;
     }
 
     @Override
@@ -87,7 +63,7 @@ public class BagStates extends UnitStates {
     }
 
     public void transfer(BagStates to) {
-        to.items.putAll(this.items);
+        to.items.addAll(this.items);
         this.items.clear();
     }
 }
