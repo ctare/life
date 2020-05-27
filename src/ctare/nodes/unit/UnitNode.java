@@ -4,6 +4,7 @@ import ctare.Main;
 import ctare.core.Color;
 import ctare.core.Graph;
 import ctare.core.Node;
+import ctare.core.RoundObject;
 import ctare.nodes.WorkplaceNode;
 import ctare.nodes.unit.purpose.Nothing;
 import ctare.nodes.unit.purpose.Purpose;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by ctare on 2020/05/17.
  */
-public class UnitNode extends Node {
+public class UnitNode extends RoundObject {
     // private static final Color COLOR = new Color(155, 60, 60);
     private static final Color COLOR = new Color(227, 207, 105);
     private static final float speed = 3f;
@@ -31,8 +32,7 @@ public class UnitNode extends Node {
     public ArrayList<Node> plan = new ArrayList<>();
 
     public UnitNode(WorkplaceNode place) {
-        super(1);
-        this.layer = Main.instance().characterLayer;
+        super(Main.instance().characterLayer);
         this.place = place;
         this.setPosition(place.getPosition().x, place.getPosition().y);
         states = new UnitStates.Manager(this, this.getClass());
@@ -49,7 +49,7 @@ public class UnitNode extends Node {
     }
 
     @Override
-    protected int getSize() {
+    public int getRadius() {
         return 5;
     }
 

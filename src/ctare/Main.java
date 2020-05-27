@@ -115,7 +115,7 @@ public class Main extends PApplet {
 
     private void execAddUnit() {
         units.addAll(addUnits);
-        addUnits.forEach(Node::activate);
+        addUnits.forEach(RoundObject::activate);
         addUnits.clear();
     }
 
@@ -186,7 +186,7 @@ public class Main extends PApplet {
         return dist(x1, y1, x2, y2) <= r1 + r2;
     }
 
-    public boolean isHit(Node node1, Node node2) {
+    public boolean isHit(RoundObject node1, RoundObject node2) {
         return isHit(node1.getPosition().x, node1.getPosition().y, node1.getRadius(),
                 node2.getPosition().x, node2.getPosition().y, node2.getRadius());
     }

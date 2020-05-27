@@ -21,7 +21,7 @@ public class PickUpState extends State<WorkplaceNode> {
         this.target = target;
         where.states.get(CorpseMemberStates.class).unregister(target);
         target.activate();
-        target.state = new State<Node>(target, unit) {
+        target.state = new State<Node>(target, where) {
             @Override
             public void update() {
             }
