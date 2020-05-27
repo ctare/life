@@ -34,6 +34,7 @@ public class CorpseMemberStates extends ItemMemberStates<Corpse> {
                     UnitNode unit = holder.member.get(unitIndex++);
                     if (Main.instance().isHit(unit, holder)) {
                         if (unit.purpose.priority < Abandon.PRIORITY) {
+                            unit.purpose = new Abandon();
                             pickUp(unit, corpse, () -> {
                                 corpse.getOrigin().states.get(BagStates.class).transfer(unit.states.get(BagStates.class));
 
