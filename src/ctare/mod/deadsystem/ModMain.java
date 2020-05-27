@@ -28,7 +28,6 @@ public final class ModMain extends ModLoader {
     @Override
     public void statesRegister() {
         UnitNode.statesManager.register(AgeStates.class);
-//        UnitNode.statesManager.addHook.register(Corpse.class, CorpseStates::new, AgeStates.class);
         WorkplaceNode.statesManager.register(CorpseMemberStates.class);
     }
 }

@@ -13,7 +13,6 @@ import java.util.List;
  * Created by ctare on 2020/05/25.
  */
 public class BagStates extends UnitStates {
-    // private HashMap<Object, Item> items = new HashMap<>();
     private List<Item> items = new ArrayList<>();
     private UnitNode owner;
     private static final int CLOSENESS = 0;
@@ -44,7 +43,6 @@ public class BagStates extends UnitStates {
     }
 
     public void add(Item item) {
-//        items.put(item.key, item);
         items.add(item);
         item.setPosition(owner.getPosition());
     }
